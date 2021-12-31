@@ -1,0 +1,23 @@
+extends OnGroundState
+
+#
+# [State: Enter]
+func enter(_data := {}) -> void:
+	sprite.play("Idle")
+
+#
+# [State: Input]
+func handle_input(event) -> void:
+	var hold:Vector2 = player.query_axis()
+	#
+	# Jump
+	if event.is_action_pressed("jump"):
+		emit_signal("transition_to", "jump")
+	#
+	# Crouch
+	elif event.is_action_pressed("down") or hold.y < 0:
+		emit_signal("transition_to", "crouch")
+	#
+	# Move
+	if event.is_action_pressed("left") or event.is_action_pressed("right") or hold.x != 0:
+		emit_signal("transition_to", "move")
