@@ -1,24 +1,33 @@
 extends OnGroundState
 
 #
-# [State: Enter]
-func enter(_data := {}) -> void:
-	player.speed = player.move_speed
-	
-	sprite.play("Run")
-
-#
-# [State: Update]
-func physics_update(delta: float) -> void:
+# [State: Transition]
+func check_state() -> void:
+	#
+	# Stop
 	if player.direction == 0:
 		emit_signal("transition_to", "idle")
-
-	.physics_update(delta)
+	#
+	# Move
+	else:
+		if player.shift:
+			player.speed = player.dash_speed
+			sprite.play("Dash")
+		else:
+			player.speed = player.move_speed
+			sprite.play("Run")
 
 #
 # [State: Input]
 func handle_input(event) -> void:
 	#
 	# Jump
-	if event.is_action_pressed("jump") or player.jump:
-		emit_signal("transition_to", "jump")
+	if event.is_action_pressed("jump"):
+		if player.shift:
+			emit_signal("transition_to", "jump", { speed = player.leap_speed })
+		else:
+			emit_signal("transition_to", "jump")
+	#
+	# Crawl
+	elif event.is_action_pressed("down"):
+		emit_signal("transition_to", "crawl")

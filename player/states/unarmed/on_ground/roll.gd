@@ -10,4 +10,9 @@ func enter(_data := {}) -> void:
 #
 # [State: OnAnimationFinished]
 func _on_animation_finished():
-	emit_signal("transition_to", "stand")
+	player.test_ceiling()
+	
+	if player.can_stand:
+		emit_signal("transition_to", "stand")
+	else:
+		emit_signal("transition_to", "crouch")

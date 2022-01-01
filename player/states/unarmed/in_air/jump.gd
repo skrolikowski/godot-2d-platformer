@@ -3,12 +3,14 @@ extends MotionState
 #
 # [State: Enter]
 func enter(data := {}) -> void:
-	var axis: Vector2 = data.get('axis', Vector2.UP)
-	var factor: float = 1.0
+	var axis:    Vector2 = data.get("axis", Vector2.UP)
+	var factor:  float   = 1.0
+	var impulse: int     = data.get("impulse", player.jump_impulse)
+	var speed:   int     = data.get("speed", player.air_speed)
 
-	player.speed       = player.air_speed
+	player.speed       = speed
+	player.velocity    = axis * impulse * factor
 	player.jump_count += 1
-	player.velocity    = axis * player.jump_impulse * factor
 
 	if player.jump_count == 1:
 		sprite.play("Jump")
@@ -23,7 +25,7 @@ func physics_update(delta: float) -> void:
 	#
 	# Falling
 	if player.velocity.y > 0:
-		emit_signal("transition_to", "fall")
+		emit_signal("transition_to", "fall", { speed = player.speed })
 
 #
 # [State: Input]

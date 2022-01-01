@@ -4,19 +4,26 @@ extends OnGroundState
 #
 # [State: Enter]
 func enter(_data := {}) -> void:
+	player.boundsStand.disabled  = false
+	player.boundsCrouch.disabled = true
+
 	sprite.play("Stand")
+
+
+# [State: Transition]
+func check_state() -> void:
+	#
+	# Move
+	if player.direction != 0:
+		emit_signal("transition_to", "move")
 
 #
 # [State: Input]
-func handle_input(event) -> void:
+func handle_input(_event) -> void:
 	#
 	# Jump
-	if event.is_action_pressed("jump"):
+	if player.jump:
 		emit_signal("transition_to", "jump")
-	#
-	# Move
-	elif event.is_action_pressed("left") or event.is_action_pressed("right"):
-		emit_signal("transition_to", "move")
 
 #
 # [State: OnAnimationFinished]
