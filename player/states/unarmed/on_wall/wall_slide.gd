@@ -2,9 +2,7 @@ extends MotionState
 
 #
 # [State: Enter]
-func enter(_data := {}) -> void:
-	player.velocity = Vector2.ZERO
-	
+func enter(_data := {}) -> void:	
 	sprite.play("Wall Slide")
 
 #

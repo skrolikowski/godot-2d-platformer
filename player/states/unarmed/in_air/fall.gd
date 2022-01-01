@@ -4,7 +4,7 @@ extends MotionState
 # [State: Enter]
 func enter(data := {}) -> void:
 	player.speed = data.get("speed", player.air_speed)
-	
+
 	sprite.play("Fall")
 
 #
@@ -27,7 +27,7 @@ func check_state() -> void:
 		#
 		# Ledge Grab
 		if player.can_grab_ledge:
-			emit_signal("transition_to", "hang")
+			emit_signal("transition_to", "hang", { direction = player.direction })
 		#
 		# Wall Slide
 		elif player.can_wall_slide:
@@ -37,7 +37,13 @@ func check_state() -> void:
 # [State: Input]
 func handle_input(event):
 	#
-	# Falling Jump
+	# Jump
 	if event.is_action_pressed("jump"):
-		if player.time_off_ground < player.jump_buffer:
+		#
+		# Double Jump
+		if player.previous_state in ["jump", "fall"] and player.jump_count < player.jump_max_count:
+			emit_signal("transition_to", "jump", { factor = 0.85 })
+		#
+		# Falling Jump
+		elif player.previous_state == "move" and player.time_off_ground < player.jump_buffer:
 			emit_signal("transition_to", "jump")

@@ -17,12 +17,17 @@ func physics_update(delta: float) -> void:
 
 	.physics_update(delta)
 
+	#
+	# Aiming => Crouch
+	if player.aiming:
+		emit_signal("transition_to", "crouch")
+
 #
 # [State: Transition]
 func check_state() -> void:
 	#
 	# Stand
-	if player.down == 0 and player.can_stand:
+	if player.down == 0 && player.can_stand:
 		emit_signal("transition_to", "stand")
 	#
 	# Crouch

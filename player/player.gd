@@ -8,6 +8,7 @@ onready var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravi
 # Bounds
 onready var boundsStand:  CollisionShape2D = get_node("BoundsStand") as CollisionShape2D
 onready var boundsCrouch: CollisionShape2D = get_node("BoundsCrouch") as CollisionShape2D
+onready var boundsAir:    CollisionShape2D = get_node("BoundsAir") as CollisionShape2D
 # For Ledge Checking..
 onready var ledgeUpperRay2d: RayCast2D = get_node("Body/LedgeUpperRay2d") as RayCast2D
 onready var ledgeLowerRay2d: RayCast2D = get_node("Body/LedgeLowerRay2d") as RayCast2D
@@ -33,6 +34,7 @@ var left:      float = 0.0
 var up:        float = 0.0
 var down:      float = 0.0
 var shift:     bool  = false
+var aiming:    bool  = false
 
 var is_on_upper_wall:    bool = false
 var is_on_lower_wall:    bool = false
@@ -49,11 +51,13 @@ var wall_friction:   float = 0.08
 var jump:           bool  = false
 var jump_buffer:	float = 0.25
 var jump_impulse:   int   = 1200
-var jump_release:   float = 0.5
+var jump_release:   float = jump_impulse * 0.2
 var jump_count:     int   = 0
 var jump_max_count: int   = 2
 
+var previous_state: String
 var current_state: String
+
 var climb_offset: Vector2 = Vector2(28, -84)
 var collision_info: KinematicCollision2D
 var look_direction: Vector2 = Vector2.RIGHT setget set_look_direction
@@ -102,6 +106,12 @@ func record_input(event: InputEvent) -> void:
 		shift = true
 	elif event.is_action_released("shift"):
 		shift = false
+	#
+	# Aim
+	elif event.is_action_pressed("aim") && !aiming:
+		aiming = true
+	elif event.is_action_released("aim"):
+		aiming = false
 
 #
 #
@@ -127,7 +137,7 @@ func test_ceiling() -> void:
 	# ceilingLeftRay2d.visible  = ceilingLeftRay2d.is_colliding()
 	# ceilingRightRay2d.visible = ceilingRightRay2d.is_colliding()
 	
-	can_stand = not ceilingLeftRay2d.is_colliding() and not ceilingRightRay2d.is_colliding()
+	can_stand = not ceilingLeftRay2d.is_colliding() && not ceilingRightRay2d.is_colliding()
 
 #
 # [Test: Wall/Ledge Detection]
@@ -137,8 +147,8 @@ func test_walls_and_ledge() -> void:
 
 	is_on_upper_wall = wallUpperRay2d.is_colliding()
 	is_on_lower_wall = wallLowerRay2d.is_colliding()
-	can_wall_slide   = is_on_upper_wall and is_on_lower_wall
-	can_detect_ledge = not is_on_upper_wall and is_on_lower_wall
+	can_wall_slide   = is_on_upper_wall && is_on_lower_wall
+	can_detect_ledge = not is_on_upper_wall && is_on_lower_wall
 	can_grab_ledge   = false
 
 	if can_detect_ledge:
@@ -167,5 +177,6 @@ func set_dead() -> void:
 
 #
 #
-func _on_state_changed(name: String) -> void:
-	current_state = name
+func _on_state_changed(name: String, prev_name: String) -> void:
+	current_state  = name
+	previous_state = prev_name

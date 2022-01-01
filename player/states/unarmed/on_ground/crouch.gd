@@ -20,11 +20,11 @@ func physics_update(delta: float) -> void:
 func check_state() -> void:
 	#
 	# Stand
-	if player.down == 0 and player.can_stand:
+	if player.down == 0 and player.can_stand && not player.aiming:
 		emit_signal("transition_to", "stand")
 	#
 	# Crawl
-	elif player.direction != 0:
+	elif player.direction != 0 && not player.aiming:
 		emit_signal("transition_to", "crawl")
 
 #

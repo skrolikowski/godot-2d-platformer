@@ -1,8 +1,12 @@
 extends MotionState
 
+var direction: float
+
 #
 # [State: Enter]
-func enter(_data := {}) -> void:
+func enter(data := {}) -> void:
+	direction = data.get("direction", 0)
+
 	sprite.play("Hang")
 
 #
@@ -15,6 +19,10 @@ func handle_input(event) -> void:
 	#
 	# Drop
 	elif event.is_action_pressed("down"):
+		emit_signal("transition_to", "fall")
+	elif event.is_action_pressed("left") && direction > 0:
+		emit_signal("transition_to", "fall")
+	elif event.is_action_pressed("right") && direction < 0:
 		emit_signal("transition_to", "fall")
 	#
 	# Jump

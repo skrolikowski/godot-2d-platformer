@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://player/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://player/state_name_label.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://player/Player.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://Player/states/unarmed/on_ground/move.gd" type="Script" id=6]
 [ext_resource path="res://player/states/unarmed/in_air/jump.gd" type="Script" id=7]
+[ext_resource path="res://player/states/unarmed/on_ground/look_up.gd" type="Script" id=8]
 [ext_resource path="res://player/states/unarmed/in_air/fall.gd" type="Script" id=9]
 [ext_resource path="res://player/states/unarmed/on_ground/land.gd" type="Script" id=10]
 [ext_resource path="res://player/states/unarmed/on_ground/crouch.gd" type="Script" id=12]
@@ -32,11 +33,17 @@ script = ExtResource( 3 )
 
 [node name="BoundsStand" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BoundsCrouch" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 10.5 )
 shape = SubResource( 1 )
 disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Body" type="Node2D" parent="."]
 position = Vector2( 0, -22 )
@@ -114,6 +121,9 @@ script = ExtResource( 18 )
 
 [node name="Roll" type="Node" parent="StateMachine"]
 script = ExtResource( 19 )
+
+[node name="LookUp" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
 
 [node name="StateNameLabel" type="Label" parent="."]
 margin_left = -20.0

@@ -29,15 +29,15 @@ func physics_update(delta: float) -> void:
 
 #
 # [State: Input]
-func handle_input(event) -> void:
+func handle_input(event: InputEvent) -> void:
 	#
 	# Jump
 	if event.is_action_pressed("jump"):
 		#
 		# Another Jump
-		if player.jump_count >= 1 and player.jump_count < player.jump_max_count:
-			emit_signal("transition_to", "jump", { factor = 0.85 })
-	# #
-	# # Terminate Jump
-	# elif event.is_action_released("jump"):
-	# 	player.velocity.y *= player.jump_release
+		if not player.is_on_floor() and player.jump_count < player.jump_max_count:
+			emit_signal("transition_to", "jump", { factor = 0.65 })
+	#
+	# Terminate Jump
+	elif event.is_action_released("jump"):
+		player.velocity.y = -player.jump_release

@@ -3,15 +3,15 @@ extends OnGroundState
 #
 # [State: Enter]
 func enter(_data := {}) -> void:
-	sprite.play("Idle")
+	sprite.play("Look Up")
 
 #
 # [State: Transition]
 func check_state() -> void:
 	#
-	# Look Up
-	if player.up > 0:
-		emit_signal("transition_to", "look_up")
+	# Idle
+	if player.up == 0:
+		emit_signal("transition_to", "idle")
 	#
 	# Crouch
 	if player.down > 0 && not player.aiming:

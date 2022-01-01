@@ -3,7 +3,6 @@ extends OnGroundState
 #
 # [State: Enter]
 func enter(_data := {}) -> void:
-	player.velocity = Vector2.ZERO
 	player.jump_count = 0
 	
 	sprite.play("Land")

@@ -1,6 +1,16 @@
 extends OnGroundState
 
 #
+# [State: Update]
+func physics_update(delta: float) -> void:
+	.physics_update(delta)
+
+	#
+	# Aiming => Idle
+	if player.aiming:
+		emit_signal("transition_to", "idle")
+
+#
 # [State: Transition]
 func check_state() -> void:
 	#

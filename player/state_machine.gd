@@ -4,13 +4,14 @@ extends StateMachine
 onready var player: Player = owner as Player
 
 # OnGround
-onready var idle   := $Idle
-onready var crouch := $Crouch
-onready var stand  := $Stand
-onready var crawl  := $Crawl
-onready var roll   := $Roll
-onready var land   := $Land
-onready var move   := $Move
+onready var idle    := $Idle
+onready var crouch  := $Crouch
+onready var stand   := $Stand
+onready var crawl   := $Crawl
+onready var roll    := $Roll
+onready var land    := $Land
+onready var move    := $Move
+onready var look_up := $LookUp
 # OnWall
 onready var climb      := $Climb
 onready var hang       := $Hang
@@ -23,13 +24,14 @@ onready var fall     := $Fall
 func _ready() -> void:
 	state_map = {
 		# OnGround
-		"idle":   idle,
-		"crouch": crouch,
-		"stand":  stand,
-		"crawl":  crawl,
-		"roll":   roll,
-		"move":   move,
-		"land":   land,
+		"idle":    idle,
+		"crouch":  crouch,
+		"stand":   stand,
+		"crawl":   crawl,
+		"roll":    roll,
+		"move":    move,
+		"land":    land,
+		"look_up": look_up,
 		# OnWall
 		"hang":       hang,
 		"climb":      climb,

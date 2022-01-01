@@ -65,6 +65,8 @@ func _change_state(name, data := {}) -> void:
 	if not _active:
 		return
 	
+	var prev_name = state.name.to_lower()
+	
 	state.exit()
 	
 	# stack management
@@ -78,7 +80,7 @@ func _change_state(name, data := {}) -> void:
 	
 	# change state
 	state = state_stack[0]
-	emit_signal("state_changed", name)
+	emit_signal("state_changed", name, prev_name)
 	
 	if name != "previous":
 		state.enter(data)
