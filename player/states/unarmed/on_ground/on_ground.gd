@@ -7,6 +7,6 @@ func physics_update(delta: float) -> void:
 	.physics_update(delta)
 
 	#
-	# InAir
+	# InAir (falling)
 	if not player.is_on_floor():
 		emit_signal("transition_to", "fall")

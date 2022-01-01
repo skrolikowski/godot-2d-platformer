@@ -18,7 +18,6 @@ onready var wall_slide := $WallSlide
 onready var wall_jump  := $WallJump
 # InAir
 onready var jump     := $Jump
-onready var jump_2nd := $DoubleJump
 onready var fall     := $Fall
 
 func _ready() -> void:
@@ -37,9 +36,8 @@ func _ready() -> void:
 		"wall_slide": wall_slide,
 		"wall_jump":  wall_jump,
 		# InAir
-		"jump":     jump,
-		"jump_2nd": jump_2nd,
-		"fall":     fall,
+		"jump": jump,
+		"fall": fall,
 	}
 	
 func _change_state(name, data := {}) -> void:

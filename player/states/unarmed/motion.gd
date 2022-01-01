@@ -29,7 +29,7 @@ func move_and_collide(delta: float) -> KinematicCollision2D:
 	# OnGround (rolling)
 	elif player.current_state == "roll":
 		player.velocity.x  = player.speed * player.look_direction.x
-		player.velocity.y += player.gravity * delta
+		player.velocity.y += player.gravity * delta	
 	#
 	# Default
 	else:

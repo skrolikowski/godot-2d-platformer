@@ -17,7 +17,7 @@ var speed:        int = move_speed
 var dash_speed:   int = move_speed * 1.25
 var air_speed:    int = move_speed * 0.65
 var crouch_speed: int = move_speed * 0.3
-var roll_speed:   int = move_speed * 0.5
+var roll_speed:   int = move_speed * 1.5
 
 var direction: float = 0.0
 var right:     float = 0.0
@@ -25,16 +25,15 @@ var left:      float = 0.0
 var up:        float = 0.0
 var down:      float = 0.0
 
+var time_off_ground: float = 0
 var wall_friction: float = 0.08
 
-var jump_request:   bool  = false
-var jump_buffer:	float = 0.5
-var jump_impulse:   int   = 1200
-var jump_release:   int   = jump_impulse * 0.2
+var jump:           bool  = false
+var jump_buffer:	float = 0.25
+var jump_impulse:   float = 1200.0
+var jump_release:   float = 0.5
 var jump_count:     int   = 0
 var jump_max_count: int   = 2
-
-var roll_time: float = 0.3
 
 var current_state: String
 var climb_offset: Vector2 = Vector2(28, -84)
@@ -43,7 +42,7 @@ var look_direction: Vector2 = Vector2.RIGHT setget set_look_direction
 
 #
 # Player Input
-func unhandled_input(event: InputEvent) -> void:
+func record_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left") && left <= 0.01:
 		left = event.get_action_strength("left")
 		direction -= left
@@ -64,10 +63,18 @@ func unhandled_input(event: InputEvent) -> void:
 		down = event.get_action_strength("down")
 	elif event.is_action_released("down"):
 		down = 0.0
-	elif event.is_action_pressed("jump") && !jump_request:
-		jump_request = true
+	elif event.is_action_pressed("jump") && !jump:
+		jump = true
 	elif event.is_action_released("jump"):
-		jump_request = false
+		jump = false
+
+#
+#
+func _process(delta: float):
+	if is_on_floor():
+		time_off_ground = 0
+	else:
+		time_off_ground += delta
 
 #
 # [Query: Is player requesting axis?]

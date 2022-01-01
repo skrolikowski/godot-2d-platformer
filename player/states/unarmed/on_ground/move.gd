@@ -10,7 +10,7 @@ func enter(_data := {}) -> void:
 #
 # [State: Update]
 func physics_update(delta: float) -> void:
-	if (player.right - player.left) == 0:
+	if player.direction == 0:
 		emit_signal("transition_to", "idle")
 
 	.physics_update(delta)
@@ -20,5 +20,5 @@ func physics_update(delta: float) -> void:
 func handle_input(event) -> void:
 	#
 	# Jump
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump") or player.jump:
 		emit_signal("transition_to", "jump")

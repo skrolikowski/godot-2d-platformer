@@ -14,7 +14,7 @@ func update(_delta: float) -> void:
 #
 # [State: Input]
 func _unhandled_input(event) -> void:
-	player.unhandled_input(event)
+	player.record_input(event)
 
 #
 # [Query: Is player requesting dash?]
