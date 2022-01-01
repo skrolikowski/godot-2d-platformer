@@ -8,7 +8,7 @@ onready var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravi
 # Bounds
 onready var boundsStand:  CollisionShape2D = get_node("BoundsStand") as CollisionShape2D
 onready var boundsCrouch: CollisionShape2D = get_node("BoundsCrouch") as CollisionShape2D
-onready var boundsAir:    CollisionShape2D = get_node("BoundsAir") as CollisionShape2D
+
 # For Ledge Checking..
 onready var ledgeUpperRay2d: RayCast2D = get_node("Body/LedgeUpperRay2d") as RayCast2D
 onready var ledgeLowerRay2d: RayCast2D = get_node("Body/LedgeLowerRay2d") as RayCast2D
@@ -133,11 +133,13 @@ func test_ceiling() -> void:
 	ceilingLeftRay2d.force_raycast_update()
 	ceilingRightRay2d.force_raycast_update()
 
+	is_on_left_ceiling  = ceilingLeftRay2d.is_colliding()
+	is_on_right_ceiling = ceilingRightRay2d.is_colliding()
 	# debug
 	# ceilingLeftRay2d.visible  = ceilingLeftRay2d.is_colliding()
 	# ceilingRightRay2d.visible = ceilingRightRay2d.is_colliding()
 	
-	can_stand = not ceilingLeftRay2d.is_colliding() && not ceilingRightRay2d.is_colliding()
+	can_stand = not is_on_left_ceiling && not is_on_right_ceiling
 
 #
 # [Test: Wall/Ledge Detection]

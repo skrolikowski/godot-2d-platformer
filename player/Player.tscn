@@ -76,7 +76,7 @@ position = Vector2( -5, 23 )
 cast_to = Vector2( 0, -16 )
 
 [node name="CeilingRightRay2d" type="RayCast2D" parent="Body"]
-position = Vector2( 4.5, 23 )
+position = Vector2( 5, 23 )
 cast_to = Vector2( 0, -16 )
 
 [node name="StateMachine" type="Node" parent="."]
