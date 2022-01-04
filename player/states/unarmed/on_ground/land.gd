@@ -5,7 +5,7 @@ extends OnGroundState
 func enter(_data := {}) -> void:
 	player.jump_count = 0
 	
-	sprite.play("Land")
+	player.animatedSprite.play("Land")
 
 #
 # [State: Transition]
@@ -29,5 +29,5 @@ func handle_input(event) -> void:
 
 #
 # [State: OnAnimationFinished]
-func _on_animation_finished():
+func _on_animation_finished(_name: String) -> void:
 	emit_signal("transition_to", "idle")

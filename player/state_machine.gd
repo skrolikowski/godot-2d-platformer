@@ -12,6 +12,7 @@ onready var roll    := $Roll
 onready var land    := $Land
 onready var move    := $Move
 onready var look_up := $LookUp
+onready var melee   := $Melee
 # OnWall
 onready var climb      := $Climb
 onready var hang       := $Hang
@@ -32,6 +33,7 @@ func _ready() -> void:
 		"move":    move,
 		"land":    land,
 		"look_up": look_up,
+		"melee":   melee,
 		# OnWall
 		"hang":       hang,
 		"climb":      climb,
@@ -60,7 +62,3 @@ func _unhandled_input(event: InputEvent):
 	# i.e. attack, take damage, etc..
 	
 	state.handle_input(event)
-
-
-func _on_animation_finished():
-	state._on_animation_finished()

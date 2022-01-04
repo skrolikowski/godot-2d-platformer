@@ -13,9 +13,9 @@ func enter(data := {}) -> void:
 	player.jump_count += 1
 
 	if player.jump_count == 1:
-		sprite.play("Jump")
+		player.animatedSprite.play("Jump")
 	else:
-		sprite.play("Double Jump")
+		player.animatedSprite.play("Flip")
 
 #
 # [State: Update]

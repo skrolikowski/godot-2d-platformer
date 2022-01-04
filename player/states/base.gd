@@ -1,9 +1,7 @@
 class_name ActorState
 extends State
 
-onready var sprite: AnimatedSprite = owner.get_node("Body/AnimatedSprite") as AnimatedSprite
 onready var player: Player = owner as Player
-
 
 #
 # [State: Update]

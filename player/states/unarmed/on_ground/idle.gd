@@ -3,7 +3,7 @@ extends OnGroundState
 #
 # [State: Enter]
 func enter(_data := {}) -> void:
-	sprite.play("Idle")
+	player.animatedSprite.play("Idle")
 
 #
 # [State: Transition]
@@ -28,3 +28,7 @@ func handle_input(event) -> void:
 	# Jump
 	if event.is_action_pressed("jump"):
 		emit_signal("transition_to", "jump")
+	#
+	# Melee
+	elif event.is_action_pressed("melee"):
+		emit_signal("transition_to", "melee")

@@ -19,6 +19,111 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/state_machine.gd"
 }, {
+"base": "Reference",
+"class": "DTS",
+"language": "GDScript",
+"path": "res://addons/dialogic/Localization/translation_service.gd"
+}, {
+"base": "Node",
+"class": "Dialogic",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicClass.gd"
+}, {
+"base": "Control",
+"class": "DialogicBackgroundMusic",
+"language": "GDScript",
+"path": "res://addons/dialogic/Nodes/BackgroundMusic.gd"
+}, {
+"base": "Node",
+"class": "DialogicDefinitionsUtil",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicDefinitionsUtil.gd"
+}, {
+"base": "Reference",
+"class": "DialogicResources",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicResources.gd"
+}, {
+"base": "Reference",
+"class": "DialogicUtil",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicUtil.gd"
+}, {
+"base": "GDWeaponsCapacity",
+"class": "GDWeaponsAmmo",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/Ammo/Ammo.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsAutoAttack",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/AutoAttack/AutoAttack.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsBoolBlocker",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/BoolBlocker/BoolBlocker.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsBulletSpawner",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/BulletSpawner/BulletSpawner.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsBurst",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/CommonComponents/Burst/Burst.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsCapacity",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/Util/Capacity/Capacity.gd"
+}, {
+"base": "GDWeaponsCapacity",
+"class": "GDWeaponsCharge",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/Charge/Charge.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsCombo",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/CommonComponents/Combo/Combo.gd"
+}, {
+"base": "GDWeaponsBoolBlocker",
+"class": "GDWeaponsEndBlocker",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/BoolBlocker/EndBlocker.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsLongAction",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/Util/LongAction/LongAction.gd"
+}, {
+"base": "GDWeaponsCapacity",
+"class": "GDWeaponsMagCapacity",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/Magazine/MagCapacity.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsMagazine",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/Magazine/Magazine.gd"
+}, {
+"base": "Node",
+"class": "GDWeaponsRecoil",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/CommonComponents/Recoil/Recoil.gd"
+}, {
+"base": "GDWeaponsBoolBlocker",
+"class": "GDWeaponsStartBlocker",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/BaseComponents/BoolBlocker/StartBlocker.gd"
+}, {
+"base": "GDWeaponsLongAction",
+"class": "GDWeaponsWeapon",
+"language": "GDScript",
+"path": "res://GodotWeapons/src/Weapon.gd"
+}, {
 "base": "ActorState",
 "class": "MotionState",
 "language": "GDScript",
@@ -47,6 +152,27 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ActorState": "",
 "ActorStateMachine": "",
+"DTS": "",
+"Dialogic": "",
+"DialogicBackgroundMusic": "",
+"DialogicDefinitionsUtil": "",
+"DialogicResources": "",
+"DialogicUtil": "",
+"GDWeaponsAmmo": "",
+"GDWeaponsAutoAttack": "",
+"GDWeaponsBoolBlocker": "",
+"GDWeaponsBulletSpawner": "",
+"GDWeaponsBurst": "",
+"GDWeaponsCapacity": "",
+"GDWeaponsCharge": "",
+"GDWeaponsCombo": "",
+"GDWeaponsEndBlocker": "",
+"GDWeaponsLongAction": "",
+"GDWeaponsMagCapacity": "",
+"GDWeaponsMagazine": "",
+"GDWeaponsRecoil": "",
+"GDWeaponsStartBlocker": "",
+"GDWeaponsWeapon": "",
 "MotionState": "",
 "OnGroundState": "",
 "Player": "",
@@ -58,6 +184,10 @@ _global_script_class_icons={
 
 config/name="[Prototype] FSM"
 run/main_scene="res://Demo.tscn"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
 
 [global]
 
@@ -102,6 +232,16 @@ shift={
 aim={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":76,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+fire={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":74,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+melee={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

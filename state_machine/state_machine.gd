@@ -40,12 +40,11 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 
-
-func _on_animation_finished() -> void:
+func _on_animation_finished(name: String) -> void:
 	if not _active:
 		return
 
-	state._on_animation_finished()
+	state._on_animation_finished(name)
 
 #
 # [Internal: Enable/Disable State]

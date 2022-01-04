@@ -6,7 +6,7 @@ func enter(_data := {}) -> void:
 	player.boundsStand.disabled  = true
 	player.boundsCrouch.disabled = false
 
-	sprite.play("Crouch")
+	player.animatedSprite.play("Crouch")
 
 #
 # [State: Update]

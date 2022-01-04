@@ -5,11 +5,12 @@ onready var timer:   Timer	= $"Timer"
 onready var body:    Node2D = $Body
 onready var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+onready var animatedSprite: AnimationPlayer = get_node("Body/AnimationPlayer") as AnimationPlayer
+onready var meleeShape2d: CollisionShape2D = get_node("Body/MeleeArea2D/MeleeShape2D") as CollisionShape2D
 # Bounds
 onready var boundsStand:  CollisionShape2D = get_node("BoundsStand") as CollisionShape2D
 onready var boundsCrouch: CollisionShape2D = get_node("BoundsCrouch") as CollisionShape2D
-
-# For Ledge Checking..
+# Ledge Checking
 onready var ledgeUpperRay2d: RayCast2D = get_node("Body/LedgeUpperRay2d") as RayCast2D
 onready var ledgeLowerRay2d: RayCast2D = get_node("Body/LedgeLowerRay2d") as RayCast2D
 # Ceiling Checks
@@ -23,10 +24,10 @@ var velocity:     Vector2 = Vector2.ZERO
 var move_speed:   int = 400
 var speed:        int = move_speed
 var dash_speed:   int = move_speed * 1.5
-var air_speed:    int = move_speed * 0.8
+var air_speed:    int = move_speed * 0.75
 var leap_speed:   int = move_speed * 1.25
 var crawl_speed:  int = move_speed * 0.5
-var roll_speed:   int = move_speed * 1
+var roll_speed:   int = move_speed * 0.85
 
 var direction: float = 0.0
 var right:     float = 0.0
@@ -35,6 +36,7 @@ var up:        float = 0.0
 var down:      float = 0.0
 var shift:     bool  = false
 var aiming:    bool  = false
+var melee:     bool  = false
 
 var is_on_upper_wall:    bool = false
 var is_on_lower_wall:    bool = false
@@ -112,6 +114,12 @@ func record_input(event: InputEvent) -> void:
 		aiming = true
 	elif event.is_action_released("aim"):
 		aiming = false
+	#
+	# Melee
+	elif event.is_action_pressed("melee") && !melee:
+		melee = true
+	elif event.is_action_released("melee"):
+		melee = false
 
 #
 #

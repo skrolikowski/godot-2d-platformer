@@ -10,9 +10,9 @@ func enter(data := {}) -> void:
 
 	player.jump_count = 2
 	
-	sprite.play("Double Jump")
+	player.animatedSprite.play("Flip")
 
 #
 # [State: OnAnimationFinished]
-func _on_animation_finished():
+func _on_animation_finished(_name: String):
 	emit_signal("transition_to", "fall")

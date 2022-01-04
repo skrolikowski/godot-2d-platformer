@@ -32,5 +32,5 @@ func check_state() -> void:
 func physics_update(_delta: float) -> void:
 	pass
 
-func _on_animation_finished():
+func _on_animation_finished(_name: String):
 	pass

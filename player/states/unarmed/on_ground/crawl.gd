@@ -8,7 +8,7 @@ func enter(_data := {}) -> void:
 
 	player.speed = player.crawl_speed
 	
-	sprite.play("Crawl")
+	player.animatedSprite.play("Crawl")
 
 #
 # [State: Update]

@@ -3,7 +3,7 @@ extends MotionState
 #
 # [State: Enter]
 func enter(_data := {}) -> void:	
-	sprite.play("Wall Slide")
+	player.animatedSprite.play("Wall Slide")
 
 #
 # [State: Transition]

@@ -22,10 +22,10 @@ func check_state() -> void:
 	else:
 		if player.shift:
 			player.speed = player.dash_speed
-			sprite.play("Dash")
+			player.animatedSprite.play("Dash")
 		else:
 			player.speed = player.move_speed
-			sprite.play("Run")
+			player.animatedSprite.play("Run")
 
 #
 # [State: Input]

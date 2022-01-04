@@ -5,7 +5,7 @@ extends MotionState
 func enter(data := {}) -> void:
 	player.speed = data.get("speed", player.air_speed)
 
-	sprite.play("Fall")
+	player.animatedSprite.play("Fall")
 
 #
 # [State: Update]

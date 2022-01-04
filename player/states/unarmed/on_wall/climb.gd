@@ -6,11 +6,11 @@ func enter(_data := {}) -> void:
 	player.boundsStand.disabled  = true
 	player.boundsCrouch.disabled = true
 	
-	sprite.play("Climb")
+	player.animatedSprite.play("Climb")
 
 #
 # [State: OnAnimationFinished]
-func _on_animation_finished():
+func _on_animation_finished(_name: String):
 	player.position += player.climb_offset * Vector2(player.look_direction.x, 1)
 	player.boundsCrouch.disabled = false
 	player.test_ceiling()

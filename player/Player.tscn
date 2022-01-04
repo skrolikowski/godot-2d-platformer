@@ -1,15 +1,16 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://player/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://player/state_name_label.gd" type="Script" id=2]
 [ext_resource path="res://player/player.gd" type="Script" id=3]
 [ext_resource path="res://player/states/unarmed/on_ground/idle.gd" type="Script" id=4]
-[ext_resource path="res://player/Player.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://player/states/unarmed/on_ground/melee.gd" type="Script" id=5]
 [ext_resource path="res://Player/states/unarmed/on_ground/move.gd" type="Script" id=6]
 [ext_resource path="res://player/states/unarmed/in_air/jump.gd" type="Script" id=7]
 [ext_resource path="res://player/states/unarmed/on_ground/look_up.gd" type="Script" id=8]
 [ext_resource path="res://player/states/unarmed/in_air/fall.gd" type="Script" id=9]
 [ext_resource path="res://player/states/unarmed/on_ground/land.gd" type="Script" id=10]
+[ext_resource path="res://weapons/Pistol.tscn" type="PackedScene" id=11]
 [ext_resource path="res://player/states/unarmed/on_ground/crouch.gd" type="Script" id=12]
 [ext_resource path="res://player/states/unarmed/on_ground/stand.gd" type="Script" id=13]
 [ext_resource path="res://player/states/unarmed/on_ground/crawl.gd" type="Script" id=14]
@@ -18,12 +19,390 @@
 [ext_resource path="res://player/states/unarmed/on_wall/wall_jump.gd" type="Script" id=17]
 [ext_resource path="res://player/states/unarmed/on_wall/hang.gd" type="Script" id=18]
 [ext_resource path="res://player/states/unarmed/on_ground/roll.gd" type="Script" id=19]
+[ext_resource path="res://player/player.png" type="Texture" id=20]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5, 20 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 9.5 )
+
+[sub_resource type="Animation" id=20]
+resource_name = "Attack 1"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 109, 110, 111, 112, 113, 114, 115, 116 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("../../StateMachine/Melee")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_melee_area2d_enabled"
+}, {
+"args": [  ],
+"method": "on_melee_area2d_disabled"
+} ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "Attack 2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 117, 118, 119, 120, 121, 122 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "Attack 3"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 123, 124, 125, 126, 127 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Climb"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 75, 76, 77, 78, 79, 80, 81, 82 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Crawl"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 43, 44, 45, 46, 47, 48, 49, 50 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Crouch"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 37, 38, 39, 40, 41, 42 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Dash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 61, 62, 63, 64 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Flip"
+length = 0.777778
+step = 0.0555556
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0555556, 0.111111, 0.166667, 0.222222, 0.277778, 0.333333, 0.388889, 0.444444, 0.5, 0.555556, 0.611111, 0.666667, 0.722222 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "Get Up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 105, 106 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Hang"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 69, 70, 71, 72, 73, 74 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+length = 0.583333
+loop = true
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Jump"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20 ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "Knockback"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 101, 102, 103, 104 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Land"
+length = 0.25
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 21, 22 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "Look Up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 107, 108 ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 22 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Roll"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 51, 52, 53, 54, 55, 56, 57, 58, 59, 60 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("../../StateMachine/Roll")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_momentum_lost"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Run"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Slide"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 65, 66, 67, 68 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "Stand"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 37, 22 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Wall Slide"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 83, 84, 85, 86, 87, 88 ]
+}
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 14.25, 26 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0, -2 )
@@ -48,12 +427,45 @@ __meta__ = {
 [node name="Body" type="Node2D" parent="."]
 position = Vector2( 0, -22 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Body"]
-frames = ExtResource( 5 )
-animation = "Idle"
+[node name="Sprite" type="Sprite" parent="Body"]
+texture = ExtResource( 20 )
+hframes = 19
+vframes = 8
+frame = 22
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
+root_node = NodePath("../Sprite")
+"anims/Attack 1" = SubResource( 20 )
+"anims/Attack 2" = SubResource( 21 )
+"anims/Attack 3" = SubResource( 22 )
+anims/Climb = SubResource( 5 )
+anims/Crawl = SubResource( 11 )
+anims/Crouch = SubResource( 10 )
+anims/Dash = SubResource( 13 )
+anims/Flip = SubResource( 9 )
+"anims/Get Up" = SubResource( 18 )
+anims/Hang = SubResource( 15 )
+anims/Idle = SubResource( 3 )
+anims/Jump = SubResource( 7 )
+anims/Knockback = SubResource( 17 )
+anims/Land = SubResource( 8 )
+"anims/Look Up" = SubResource( 19 )
+anims/RESET = SubResource( 23 )
+anims/Roll = SubResource( 12 )
+anims/Run = SubResource( 6 )
+anims/Slide = SubResource( 14 )
+anims/Stand = SubResource( 24 )
+"anims/Wall Slide" = SubResource( 16 )
+
+[node name="Weapons" type="Node2D" parent="Body"]
+position = Vector2( 0, 12 )
+
+[node name="Pistol" parent="Body/Weapons" instance=ExtResource( 11 )]
+visible = false
+position = Vector2( 16, 0 )
 
 [node name="LedgeUpperRay2d" type="RayCast2D" parent="Body"]
 position = Vector2( 6, 2 )
@@ -78,6 +490,15 @@ cast_to = Vector2( 0, -16 )
 [node name="CeilingRightRay2d" type="RayCast2D" parent="Body"]
 position = Vector2( 5, 23 )
 cast_to = Vector2( 0, -16 )
+
+[node name="MeleeArea2D" type="Area2D" parent="Body"]
+collision_layer = 4
+monitoring = false
+
+[node name="MeleeShape2D" type="CollisionShape2D" parent="Body/MeleeArea2D"]
+position = Vector2( 26.75, 16 )
+shape = SubResource( 25 )
+disabled = true
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -125,6 +546,9 @@ script = ExtResource( 19 )
 [node name="LookUp" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
 
+[node name="Melee" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
 [node name="StateNameLabel" type="Label" parent="."]
 margin_left = -20.0
 margin_top = -40.0
@@ -140,6 +564,6 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="animation_finished" from="Body/AnimatedSprite" to="StateMachine" method="_on_animation_finished"]
+[connection signal="animation_finished" from="Body/AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 [connection signal="state_changed" from="StateMachine" to="." method="_on_state_changed"]
 [connection signal="state_changed" from="StateMachine" to="StateNameLabel" method="_on_state_changed"]

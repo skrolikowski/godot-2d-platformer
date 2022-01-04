@@ -7,7 +7,7 @@ var direction: float
 func enter(data := {}) -> void:
 	direction = data.get("direction", 0)
 
-	sprite.play("Hang")
+	player.animatedSprite.play("Hang")
 
 #
 # [State: Input]

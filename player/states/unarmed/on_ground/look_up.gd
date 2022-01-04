@@ -3,7 +3,7 @@ extends OnGroundState
 #
 # [State: Enter]
 func enter(_data := {}) -> void:
-	sprite.play("Look Up")
+	player.animatedSprite.play("Look Up")
 
 #
 # [State: Transition]

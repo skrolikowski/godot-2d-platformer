@@ -7,7 +7,7 @@ func enter(_data := {}) -> void:
 	player.boundsStand.disabled  = false
 	player.boundsCrouch.disabled = true
 
-	sprite.play("Stand")
+	player.animatedSprite.play("Stand")
 
 
 # [State: Transition]
@@ -27,5 +27,5 @@ func handle_input(_event) -> void:
 
 #
 # [State: OnAnimationFinished]
-func _on_animation_finished():
+func _on_animation_finished(_name: String):
 	emit_signal("transition_to", "idle")
