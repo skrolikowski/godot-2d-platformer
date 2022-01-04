@@ -31,8 +31,12 @@ func check_state() -> void:
 # [State: Input]
 func handle_input(event) -> void:
 	#
+	# Melee
+	if event.is_action_pressed("melee"):
+		emit_signal("transition_to", "melee")
+	#
 	# Jump
-	if event.is_action_pressed("jump"):
+	elif event.is_action_pressed("jump"):
 		if player.shift:
 			emit_signal("transition_to", "jump", { speed = player.leap_speed })
 		else:

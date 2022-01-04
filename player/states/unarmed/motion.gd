@@ -15,7 +15,7 @@ func physics_update(delta: float) -> void:
 func move_and_collide(delta: float) -> KinematicCollision2D:
 	#
 	# Locked
-	if player.aiming or player.current_state in ["climb","hang"]:
+	if player.aiming or player.current_state in ["climb","hang","melee"]:
 		player.velocity = Vector2.ZERO
 	#
 	# OnWall (falling)
