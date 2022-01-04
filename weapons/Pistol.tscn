@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://GodotWeapons/src/Weapon2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/GodotWeapons/src/Weapon2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://weapons/weapons.png" type="Texture" id=2]
-[ext_resource path="res://GodotWeapons/src/BaseComponents/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://GodotWeapons/src/BaseComponents/BoolBlocker/StartBlocker.tscn" type="PackedScene" id=4]
-[ext_resource path="res://GodotWeapons/src/BaseComponents/AutoAttack/AutoAttack.tscn" type="PackedScene" id=5]
-[ext_resource path="res://GodotWeapons/src/BaseComponents/Magazine/Magazine.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/GodotWeapons/src/BaseComponents/BulletSpawner/BulletSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/GodotWeapons/src/BaseComponents/BoolBlocker/StartBlocker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/GodotWeapons/src/BaseComponents/AutoAttack/AutoAttack.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/GodotWeapons/src/BaseComponents/Magazine/Magazine.tscn" type="PackedScene" id=6]
 
 [node name="Pistol" instance=ExtResource( 1 )]
 
